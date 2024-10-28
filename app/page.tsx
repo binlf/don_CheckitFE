@@ -176,10 +176,3 @@ export default function Home() {
     </main>
   );
 }
-
-// TODO
-// deploy the app(first thing!)(done)
-// implement editing a capsule entry(done)
-// implement adding a new capsule entry(d0ne)
-// implement search filtering(done)
-// add more styling to the table
