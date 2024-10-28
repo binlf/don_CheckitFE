@@ -16,7 +16,9 @@ const capsulesSlice = createSlice({
     setCapsules(state: CapsulesState, action: PayloadAction<Capsule[]>) {
       state.capsules = action.payload;
     },
-    addCapsule() {},
+    addCapsule(state: CapsulesState, action: PayloadAction<Capsule>) {
+      state.capsules.unshift(action.payload);
+    },
     updateCapsule(state: CapsulesState, action: PayloadAction<Capsule>) {
       state.capsules = state.capsules.map((capsule) => {
         if (capsule.id === action.payload.id) return action.payload;

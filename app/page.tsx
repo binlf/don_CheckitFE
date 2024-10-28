@@ -161,8 +161,8 @@ export default function Home() {
 // launch date, capsule id, status, type
 
 // TODO
-// deploy the app(first thing!)
-// implement editing a capsule entry
+// deploy the app(first thing!)(done)
+// implement editing a capsule entry(done)
 // implement adding a new capsule entry
 // implement search filtering
 // add more styling to the table

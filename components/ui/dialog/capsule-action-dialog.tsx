@@ -107,8 +107,7 @@ const CapsuleActionForm = ({
     onSubmit(values) {
       if (isEditMode) {
         dispatch(updateCapsule(values));
-      }
-      // else dispatch(addCapsule(values))
+      } else dispatch(addCapsule(values));
       onClose();
     },
   });
