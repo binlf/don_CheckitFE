@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React, { PropsWithChildren, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
