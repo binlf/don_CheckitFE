@@ -1,29 +1,43 @@
-import { PropsWithChildren } from "react";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "./dialog";
 import { Label } from "../label";
+import { Capsule } from "@/types";
+import { X } from "lucide-react";
 
-export const CapsuleInfoDialog = ({ children }: PropsWithChildren) => {
+type CapsuleInfoDialogProps = {
+  capsuleInfo: Capsule;
+  isOpen: boolean;
+  onClose: () => void;
+};
+
+export const CapsuleInfoDialog = ({
+  capsuleInfo,
+  isOpen,
+  onClose,
+}: CapsuleInfoDialogProps) => {
   return (
-    <Dialog>
-      <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent>
+    <Dialog open={isOpen}>
+      {/* <DialogTrigger asChild>{children}</DialogTrigger> */}
+      <DialogContent onPointerDownOutside={onClose}>
+        <DialogClose onClick={onClose}>
+          <X />
+        </DialogClose>
         <DialogHeader>
           <DialogTitle>Capsule Details</DialogTitle>
           <DialogDescription>
             See relevant information about a capsule
           </DialogDescription>
         </DialogHeader>
-        <CapsuleInfoRow label="Capsule ID:" value="XXXXXXXXXX" />
-        <CapsuleInfoRow label="Type:" value="XXXXXXXXXX" />
-        <CapsuleInfoRow label="Launch Date:" value="XXXXXXXXXX" />
-        <CapsuleInfoRow label="Status:" value="XXXXXXXXXX" />
+        <CapsuleInfoRow label="Capsule ID:" value={capsuleInfo.serial} />
+        <CapsuleInfoRow label="Type:" value={capsuleInfo.type} />
+        <CapsuleInfoRow label="Launch Date:" value={capsuleInfo.launchDate} />
+        <CapsuleInfoRow label="Status:" value={capsuleInfo.status} />
       </DialogContent>
     </Dialog>
   );
