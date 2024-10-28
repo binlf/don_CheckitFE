@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CapsuleActionDialog } from "@/components/ui/dialog/capsule-action-dialog";
 import { CapsuleInfoDialog } from "@/components/ui/dialog/capsule-info-dialog";
-// import { EditCapsuleDialog } from "@/components/ui/dialog/edit-capsule-dialog";
 import { Input } from "@/components/ui/input";
 import { Plus, Search } from "lucide-react";
 import { DataTable } from "primereact/datatable";
@@ -13,9 +12,7 @@ import { Badge } from "primereact/badge";
 import { Capsule } from "@/types";
 import { useCapsules } from "@/hooks/use-capsules";
 import { useState } from "react";
-// import { useDispatch } from "react-redux";
-// import { useFormik } from "formik";
-// import { capsuleSchema } from "@/lib/utils";
+import { useFilters } from "@/hooks/use-filters";
 
 const launchDateTemplate = (data: Capsule) => {
   return <h3>{data.launchDate || "NA"}</h3>;
@@ -31,6 +28,7 @@ export default function Home() {
   const [isEditMode, setIsEditMode] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [capsuleInfo, setCapsuleInfo] = useState<Capsule | 0>(0);
+  const { filterValue, filters, onChange } = useFilters();
 
   const destroyedCapsulesCount = capsules.filter(
     (capsule) => capsule.status === "destroyed"
@@ -109,6 +107,8 @@ export default function Home() {
             className="border-none bg-transparent ring-0"
             type="text"
             placeholder="Search capsules..."
+            onChange={onChange}
+            value={filterValue}
           />
         </header>
         {/* data table */}
@@ -123,6 +123,9 @@ export default function Home() {
             className="p-datatable-striped"
             selectionMode="single"
             onSelectionChange={(e) => setCapsuleInfo(e.value)}
+            globalFilterFields={["launchDate", "status", "type"]}
+            emptyMessage="No available capsules"
+            filters={filters}
           >
             <Column
               field="serial"
@@ -155,14 +158,8 @@ export default function Home() {
 }
 
 // TODO
-// Table Columns:
-// capsule id, launch date, type, status
-// form entries
-// launch date, capsule id, status, type
-
-// TODO
 // deploy the app(first thing!)(done)
 // implement editing a capsule entry(done)
-// implement adding a new capsule entry
-// implement search filtering
+// implement adding a new capsule entry(d0ne)
+// implement search filtering(done)
 // add more styling to the table

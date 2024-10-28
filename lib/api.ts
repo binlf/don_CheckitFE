@@ -27,12 +27,20 @@ export const fetchCapsules = async (): Promise<CapsulesResponse[]> => {
 export const fetchLaunch = async (
   flightNo: string
 ): Promise<LaunchesResponse> => {
-  const response = await fetch(`${baseUrl}launches/${flightNo}`);
-  if (!response.ok)
+  try {
+    const response = await fetch(`${baseUrl}launches/${flightNo}`);
+    if (!response.ok)
+      return {
+        date_local: "",
+        date_unix: 0,
+        date_utc: "",
+      };
+    return response.json();
+  } catch (error) {
     return {
       date_local: "",
       date_unix: 0,
       date_utc: "",
     };
-  return response.json();
+  }
 };
