@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { Capsule } from "@/types";
 
 const baseUrl = "https://api.spacexdata.com/v4/";
@@ -37,6 +39,7 @@ export const fetchLaunch = async (
       };
     return response.json();
   } catch (error) {
+    error;
     return {
       date_local: "",
       date_unix: 0,

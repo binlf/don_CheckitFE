@@ -13,6 +13,7 @@ import { Capsule } from "@/types";
 import { useCapsules } from "@/hooks/use-capsules";
 import { useState } from "react";
 import { useFilters } from "@/hooks/use-filters";
+import { PaginatorPassThroughMethodOptions } from "primereact/paginator";
 
 const launchDateTemplate = (data: Capsule) => {
   return <h3>{data.launchDate || "NA"}</h3>;
@@ -120,12 +121,31 @@ export default function Home() {
             }}
             paginator
             rows={5}
-            className="p-datatable-striped"
             selectionMode="single"
             onSelectionChange={(e) => setCapsuleInfo(e.value)}
             globalFilterFields={["launchDate", "status", "type"]}
             emptyMessage="No available capsules"
             filters={filters}
+            pt={{
+              paginator: {
+                root: {
+                  className: "p-3 gap-4",
+                },
+                pages: {
+                  className: "flex gap-4",
+                },
+                pageButton: ({
+                  context,
+                }: PaginatorPassThroughMethodOptions) => {
+                  const defaultStyles = "rounded-full p-3 align-items-center";
+                  return {
+                    className: context.active
+                      ? "bg-black text-white " + defaultStyles
+                      : "bg-white text-black " + defaultStyles,
+                  };
+                },
+              },
+            }}
           >
             <Column
               field="serial"
